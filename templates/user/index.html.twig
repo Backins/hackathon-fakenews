@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Roles</th>
                 <th>Email</th>
                 <th>Password</th>
                 <th>CreatedAt</th>
@@ -20,6 +21,13 @@
         {% for user in users %}
             <tr>
                 <td>{{ user.id }}</td>
+                <td>
+                    {% for role in user.roles %}
+                        <p>{{ role }}</p>
+                    {% else %}
+                        No roles
+                    {% endfor %}
+                </td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.password }}</td>
                 <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
