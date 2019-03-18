@@ -1,0 +1,1 @@
+Copy .env.dist -> .env.local
