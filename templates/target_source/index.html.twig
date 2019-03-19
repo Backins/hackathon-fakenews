@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TargetSource index{% endblock %}
+
+{% block body %}
+    <h1>TargetSource index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Domain</th>
+                <th>ConfidenceLevel</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for target_source in target_sources %}
+            <tr>
+                <td>{{ target_source.id }}</td>
+                <td>{{ target_source.domain }}</td>
+                <td>{{ target_source.confidenceLevel }}</td>
+                <td>
+                    <a href="{{ path('target_source_show', {'id': target_source.id}) }}">show</a>
+                    <a href="{{ path('target_source_edit', {'id': target_source.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('target_source_new') }}">Create new</a>
+{% endblock %}

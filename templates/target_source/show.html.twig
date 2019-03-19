@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TargetSource{% endblock %}
+
+{% block body %}
+    <h1>TargetSource</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ target_source.id }}</td>
+            </tr>
+            <tr>
+                <th>Domain</th>
+                <td>{{ target_source.domain }}</td>
+            </tr>
+            <tr>
+                <th>ConfidenceLevel</th>
+                <td>{{ target_source.confidenceLevel }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ target_source.createdAt ? target_source.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ target_source.updatedAt ? target_source.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('target_source_index') }}">back to list</a>
+
+    <a href="{{ path('target_source_edit', {'id': target_source.id}) }}">edit</a>
+
+    {{ include('target_source/_delete_form.html.twig') }}
+{% endblock %}
