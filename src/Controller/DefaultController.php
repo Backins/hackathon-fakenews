@@ -9,8 +9,10 @@
 namespace App\Controller;
 
 
+use App\Service\NewscanService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class DefaultController
@@ -26,5 +28,33 @@ class DefaultController extends AbstractController
     public function index()
     {
         return $this->render('front/index.html.twig');
+    }
+
+    /**
+     * @param $article
+     * @Route(path="/show", name="show", methods={"POST"})
+     */
+    public function show(Request $request)
+    {
+        $link = $request->request->get('linkSearch');
+        if (filter_var($link, FILTER_VALIDATE_URL)) {
+            $Newscan = new NewscanService();
+            $response = $Newscan->getArticle($link);
+            $object = $response->objects[0];
+
+            $topics = $Newscan->getTopicsArticle($object->tags);
+            $imageArticle = $object->images[0];
+            $contentArticle = $object->text;
+
+            return $this->render('front/show.html.twig', [
+                'topics' => $topics
+            ]);
+        }
+        return $this->render('front/show.html.twig', [
+            'errors' => [
+                'Votre saisie ne correspond pas à un lien',
+            ],
+            'link' => $link,
+        ]);
     }
 }

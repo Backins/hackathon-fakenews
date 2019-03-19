@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index Front{% endblock %}
+
+{% block body %}
+    <main>
+        <p>Accueil</p>
+        <a class="btn btn-primary" href="{{ path('app_security_login') }}">Login</a>
+        <a class="btn btn-danger" href="{{ path('app_security_logout') }}">Logout</a>
+
+        <section>
+            {% if errors is defined %}
+                <div class="alert alert-danger" role="alert">
+                    <h2>Oops ! Il semble y avoir un problème : </h2>
+                    {% for error in errors %}
+                        <p>- {{ error }}</p>
+                    {% endfor %}
+                    <p><em>Voici votre saisie : {{ link }}</em></p>
+                </div>
+            {% endif %}
+        </section>
+        <section style="width: 600px;">
+            <h2>Principaux topics de votre article</h2>
+            <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Toggle second element</button>
+            </p>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
