@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\TimestampableTrait;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TargetSource")
+ * @ORM\Entity(repositoryClass="App\Repository\TargetSourceRepository")
  */
 class TargetSource
 {

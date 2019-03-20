@@ -27,7 +27,7 @@ class TargetSourceFixtures extends Fixture
             ],
             [
                 'confidenceLevel' => 4,
-                'domain' => 'lefigaro.fr'
+                'domain' => 'leparisien.fr'
             ],
             [
                 'confidenceLevel' => 4,
