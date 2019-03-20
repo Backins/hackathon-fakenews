@@ -36,15 +36,15 @@ class DefaultController extends AbstractController
      * @param $article
      * @Route(path="/show", name="show", methods={"POST"})
      */
-    public function show(Request $request, ReviewRepository $reviewRepository)
+
+    public function show(Request $request, ReviewRepository $reviewRepository, NewscanService $newscanService)
     {
         $link = $request->request->get('linkSearch');
         if (filter_var($link, FILTER_VALIDATE_URL)) {
-            $Newscan = new NewscanService();
-            $response = $Newscan->getArticle($link);
+            $response = $newscanService->getArticle($link);
             $targetArticle = $response->objects[0];
 
-            $topics = $Newscan->getTopicsArticle($targetArticle->tags);
+            $topics = $newscanService->getTopicsArticle($targetArticle->tags);
             $user = $this->getUser();
             $findVote = false;
             if($user){
@@ -57,12 +57,16 @@ class DefaultController extends AbstractController
                 }
             }
 
+            $articleScore = $newscanService->calculArticleConfidenceLevel($targetArticle);
+
+            $topics = $newscanService->getTopicsArticle($targetArticle->tags);
 
             return $this->render('front/show.html.twig', [
                 'topics' => $topics,
                 'article' => $targetArticle,
                 'user' => $user,
-                'findVote' => $findVote
+                'findVote' => $findVote,
+                'articleScore' => $articleScore
             ]);
         }
         return $this->render('front/show.html.twig', [

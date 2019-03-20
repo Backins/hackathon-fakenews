@@ -20,7 +20,10 @@
             {% endif %}
         </section>
         <section>
-            {{ dump(article) }}
+            {#{{ dump(article) }}#}
+        </section>
+        <section>
+            <label>Score : </label>{{ articleScore * 100 }} %
         </section>
         <section>
             {% if user %}
