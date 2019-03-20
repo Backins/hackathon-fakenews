@@ -34,9 +34,9 @@ class NewscanService
         $threeMonth = $date->format('Ymd');
         $arrayReturn = [];
 
-        $topics = array_splice($topics, 0, 3);
+        $topics = array_splice($topics, 0, 1);
         foreach($topics as $topic){
-            $url = "https://api.ozae.com/gnw/articles?date=".$threeMonth."__".$now."&key=".self::OZAEKEY."&edition=fr-fr&query=".urlencode($topic->label)."&hard_limit=2";
+            $url = "https://api.ozae.com/gnw/articles?date=".$threeMonth."__".$now."&key=".self::OZAEKEY."&edition=fr-fr&query=".urlencode($topic->label)."&hard_limit=4";
             $response = self::callApi($url);
             $arrayReturn[] = [
                 'label' => $topic->label,

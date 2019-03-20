@@ -19,9 +19,26 @@
                 </div>
             {% endif %}
         </section>
+        <section>
+            {{ dump(article) }}
+        </section>
+        <section>
+            {% if user %}
+                {% if not findVote %}
+                    {{ render(controller(
+                        'App\\Controller\\ReviewController::index', {
+                            articleUrl: article.pageUrl
+                        }
+                    )) }}
+                {% else %}
+                    <p>Vous avez déjà contribué</p>
+                {% endif %}
+            {% else %}
+                <p>Pour contribuer, veuillez vous connecter</p>
+            {%  endif %}
+        </section>
         <section style="width: 750px;">
             <h2>Principaux topics de votre article</h2>
-            {{ dump(topics) }}
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     {% for topic in topics %}

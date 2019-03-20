@@ -21,24 +21,19 @@ class Review
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $articleId;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userReview")
      * @ORM\JoinColumn(referencedColumnName="id",nullable=false)
      */
     private $userReview;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $urlArticle;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getArticleId(): ?int
-    {
-        return $this->articleId;
     }
 
     public function getUserReview(): ?User
@@ -46,16 +41,21 @@ class Review
         return $this->userReview;
     }
 
-    public function setArticleId(int $articleId): self
+    public function setUserReview(?User $userReview): self
     {
-        $this->articleId = $articleId;
+        $this->userReview = $userReview;
 
         return $this;
     }
 
-    public function setUserReview(?User $userReview): self
+    public function getUrlArticle(): ?string
     {
-        $this->userReview = $userReview;
+        return $this->urlArticle;
+    }
+
+    public function setUrlArticle(string $urlArticle): self
+    {
+        $this->urlArticle = $urlArticle;
 
         return $this;
     }
