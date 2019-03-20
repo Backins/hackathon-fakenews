@@ -1,3 +1,41 @@
-<div>
-    header
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ path('app_default_index') }}">
+        <img src="#" width="30" height="30" class="d-inline-block align-top" alt="">
+        NewsScan
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('app_default_index') }}">Accueil <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Comment ça marche ?</a>
+            </li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin menu
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Target Source</a>
+                            <a class="dropdown-item" href="#">Blog</a>
+                        </div>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+        <div class="inline">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('app_security_logout') }}" class="btn btn-secondary">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('app_security_login') }}" class="btn btn-light">Connexion</a>
+                <a href="{{ path('user_new') }}" class="btn btn-success">Inscription</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
