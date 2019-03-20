@@ -49,7 +49,7 @@ Encore
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
-    //.createSharedEntry('vendor', './shared_entry.js')
+    .createSharedEntry('vendor', './shared_entry.js')
 ;
 
 module.exports = Encore.getWebpackConfig();
