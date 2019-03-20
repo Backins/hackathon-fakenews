@@ -40,14 +40,12 @@ class DefaultController extends AbstractController
         if (filter_var($link, FILTER_VALIDATE_URL)) {
             $Newscan = new NewscanService();
             $response = $Newscan->getArticle($link);
-            $object = $response->objects[0];
+            $targetArticle = $response->objects[0];
 
-            $topics = $Newscan->getTopicsArticle($object->tags);
-            $imageArticle = $object->images[0];
-            $contentArticle = $object->text;
-
+            $topics = $Newscan->getTopicsArticle($targetArticle->tags);
             return $this->render('front/show.html.twig', [
-                'topics' => $topics
+                'topics' => $topics,
+                'article' => $targetArticle,
             ]);
         }
         return $this->render('front/show.html.twig', [

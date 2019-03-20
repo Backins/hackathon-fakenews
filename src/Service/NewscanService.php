@@ -28,37 +28,28 @@ class NewscanService
 
     public function getTopicsArticle($topics)
     {
+        $date = new \DateTime();
+        $now = $date->format('Ymd');
+        $date->setTimestamp(mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
+        $threeMonth = $date->format('Ymd');
         $arrayReturn = [];
+
+        $topics = array_splice($topics, 0, 3);
         foreach($topics as $topic){
-            $url = "https://api.ozae.com/gnw/articles?date=20140101__20190630&key=".self::OZAEKEY."&edition=fr-fr&query=".urlencode($topic->label)."&hard_limit=20";
+            $url = "https://api.ozae.com/gnw/articles?date=".$threeMonth."__".$now."&key=".self::OZAEKEY."&edition=fr-fr&query=".urlencode($topic->label)."&hard_limit=2";
             $response = self::callApi($url);
             $arrayReturn[] = [
                 'label' => $topic->label,
+                'labelUrl' => str_replace(' ', '-', $topic->label),
                 'ozaeArticles' => $response
             ];
-            dump($arrayReturn);
-            die;
         }
-        return $topics;
+        return $arrayReturn;
     }
 
     private function callApi($url)
     {
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "cache-control: no-cache"
-            ),
-        ));
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
+        $response = file_get_contents($url);
         return json_decode($response);
     }
 }

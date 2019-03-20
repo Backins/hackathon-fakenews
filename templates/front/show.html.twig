@@ -19,23 +19,47 @@
                 </div>
             {% endif %}
         </section>
-        <section style="width: 600px;">
+        <section style="width: 750px;">
             <h2>Principaux topics de votre article</h2>
-            <p>
-                <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Toggle second element</button>
-            </p>
+            {{ dump(topics) }}
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+                    {% for topic in topics %}
+                        <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-{{ topic.labelUrl }}" role="tab" aria-controls="nav-home" aria-selected="true">{{ topic.label }}</a>
+                    {% else %}
+                        <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-nothing" role="tab" aria-controls="nav-home" aria-selected="true">Pas de correspondance</a>
+                    {% endfor %}
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                {% for topic in topics %}
+                    <div class="tab-pane fade" id="nav-{{ topic.labelUrl }}" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Source</th>
+                                    <th scope="col">Titre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for article in topic.ozaeArticles.articles %}
+                                    <tr>
+                                        <th scope="row">{{ article.source.domain }}</th>
+                                        <td>{{ article.name}}</td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="2">Oops ! Aucun article trouvé.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="tab-pane fade show active" id="nav-nothing" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <p>Désolé, nous n'avons pas trouvé de mot clé pour cet article.</p>
+                    </div>
+                {% endfor %}
             </div>
         </section>
     </main>
