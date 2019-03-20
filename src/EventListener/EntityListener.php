@@ -9,6 +9,7 @@
 namespace App\EventListener;
 
 
+use App\Entity\Review;
 use App\Entity\User;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
@@ -17,7 +18,7 @@ class EntityListener
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        if($entity instanceof User){
+        if($entity instanceof User || $entity instanceof Review){
             $entity->setCreatedAt(new \DateTime());
             $entity->setUpdatedAt(new \DateTime());
         }
@@ -26,7 +27,7 @@ class EntityListener
     public function preUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        if($entity instanceof User){
+        if($entity instanceof User || $entity instanceof Review){
             $entity->setUpdatedAt(new \DateTime());
         }
     }

@@ -9,6 +9,8 @@
 namespace App\Controller;
 
 
+use App\Entity\Review;
+use App\Repository\ReviewRepository;
 use App\Service\NewscanService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,7 +36,7 @@ class DefaultController extends AbstractController
      * @param $article
      * @Route(path="/show", name="show", methods={"POST"})
      */
-    public function show(Request $request)
+    public function show(Request $request, ReviewRepository $reviewRepository)
     {
         $link = $request->request->get('linkSearch');
         if (filter_var($link, FILTER_VALIDATE_URL)) {
@@ -43,9 +45,24 @@ class DefaultController extends AbstractController
             $targetArticle = $response->objects[0];
 
             $topics = $Newscan->getTopicsArticle($targetArticle->tags);
+            $user = $this->getUser();
+            $findVote = false;
+            if($user){
+                $findVote = $reviewRepository->findBy([
+                    'urlArticle' => $link,
+                    'userReview' => $this->getUser(),
+                ]);
+                if(empty($findVote)){
+                    $findVote = false;
+                }
+            }
+
+
             return $this->render('front/show.html.twig', [
                 'topics' => $topics,
                 'article' => $targetArticle,
+                'user' => $user,
+                'findVote' => $findVote
             ]);
         }
         return $this->render('front/show.html.twig', [
