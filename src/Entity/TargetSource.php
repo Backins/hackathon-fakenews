@@ -6,12 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\TimestampableTrait;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TargetSource")
- * @ORM\Table(name="target_source")
+ * @ORM\Entity(repositoryClass="App\Repository\TargetSourceRepository")
  */
 class TargetSource
 {
-    use TimestampableTrait;
 
     /**
      * @ORM\Id()
@@ -38,7 +36,7 @@ class TargetSource
 
     public function getDomain(): string
     {
-        return $this->domain;
+        return (string) $this->domain;
     }
 
 
