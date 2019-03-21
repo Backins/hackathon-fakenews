@@ -34,6 +34,15 @@ class DefaultController extends AbstractController
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route(path="/comment-ca-fonctionne", name="howappwork")
+     */
+    public function HowAppWork()
+    {
+        return $this->render('front/howAppWork.html.twig');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
      * @Route(path="/qui-somme-nous", name="whoareus")
      */
     public function WhoWeAre()

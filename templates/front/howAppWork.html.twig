@@ -1,0 +1,28 @@
+{% extends 'front_base.html.twig' %}
+
+{% block title %}Qui somme nous ?{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h1 style="text-align: center;margin: 30px;">Comment ça fonctionne ?</h1>
+        <div>
+            <img src="{{ asset('images/newsscan/svg/image-fonctionnement-23.svg') }}">
+        </div>
+        <div style="margin: 40px">
+            <p>Pour calculer un score de fiabilité, notre algorithme se base sur 6 critères :</p>
+
+             <p><b>- La présence d’un titre écrit entièrement en majuscule. </b>En effet, selon les critères de qualités rédactionnelles, un titre entièrement en majuscule est synonyme de mauvais référencement. Mais cela peut être une méthode pour attirer l’attention de l’internaute.</p>
+             <p><b>- La présence de plusieurs points d’exclamation dans le titre.</b> Comme pour les majuscules, ce n’est pas conseillé par les règles rédactionnelles et peut être une méthode pour attirer l’attention de l’internaute.</p>
+             <p><b>- Le nombre de fautes d’orthographe dans le titre.</b> Le titre étant l’élément qui donne envie ou non de lire un article, ce serait dommage qu’il y ait des fautes d’orthographe. Cela veut peut-être dire que l’article n’a pas été écrit par une personne ou un organisme sérieux, et peut donc être une fake news.</p>
+             <p><b>- Le domaine est douteux. Un domaine douteux est peut-être signe d’un site malveillant.</b> Il est fortement conseillé de ne pas s’y fier.</p>
+             <p><b>- L’article contient des fautes d’orthographe.</b> Tout comme pour le titre, un article avec beaucoup de fautes d’orthographe dans son contenu est susceptible d’avoir été écrit par une personne ou un organisme non professionnel et ne pouvant pas assurer la véracité de ses propos.</p>
+             <p><b>- Le nombre de mentions “Fake”.</b> Nous donnons la possibilité aux utilisateurs inscrits à la plateforme NewScan de laisser une mention “Fake” quand ils estiment qu’un article a l’air douteux. Le nombre de “Fake” est affiché à côté de titre de l’article sur la page des résultats.</p>
+             <p>Tous critères ont des coefficients différents correspondant à un niveau d’importance. Le critère le plus important est la sûreté du domaine et le moins important est la mention “Fake” de l’utilisateur.</p>
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
