@@ -62,42 +62,52 @@ class DefaultController extends AbstractController
             $source = parse_url($link);
             $source = $source["scheme"].'://'.$source["host"];
             $response = $newscanService->getArticle($link);
-            $targetArticle = $response->objects[0];
-            $user = $this->getUser();
-            $findVote = false;
-            if($user){
-                $findVote = $reviewRepository->findBy([
-                    'urlArticle' => $link,
-                    'userReview' => $this->getUser(),
+            if(isset($response->errorCode)){
+                return $this->render('front/show.html.twig', [
+                    'errors' => ['Votre lien semble incorrecte'],
+                    'link' => $link,
+                    'score' => ['textColor' =>0, 'backgroundColor' => 0 ,'value' => 0],
                 ]);
-                if(empty($findVote)){
-                    $findVote = false;
+            } else {
+                $targetArticle = $response->objects[0];
+                $user = $this->getUser();
+                $findVote = false;
+                if($user){
+                    $findVote = $reviewRepository->findBy([
+                        'urlArticle' => $link,
+                        'userReview' => $this->getUser(),
+                    ]);
+                    if(empty($findVote)){
+                        $findVote = false;
+                    }
                 }
+
+                $em = $this->getDoctrine()->getManager();
+                $countReview = $em->getRepository(Review::class)->getCount($link);
+
+                $score = $newscanService->calculArticleConfidenceLevel($targetArticle);
+
+                $topics = $newscanService->getTopicsArticle($targetArticle->tags);
+
+                return $this->render('front/show.html.twig', [
+                    'topics' => $topics,
+                    'article' => $targetArticle,
+                    'user' => $user,
+                    'findVote' => $findVote,
+                    'score' => $score,
+                    'link' => $link,
+                    'source' => $source,
+                    'nbVote' => $countReview[1]
+                ]);
             }
 
-            $em = $this->getDoctrine()->getManager();
-            $countReview = $em->getRepository(Review::class)->getCount($link);
-
-            $score = $newscanService->calculArticleConfidenceLevel($targetArticle);
-
-            $topics = $newscanService->getTopicsArticle($targetArticle->tags);
-
-            return $this->render('front/show.html.twig', [
-                'topics' => $topics,
-                'article' => $targetArticle,
-                'user' => $user,
-                'findVote' => $findVote,
-                'score' => $score,
-                'link' => $link,
-                'source' => $source,
-                'nbVote' => $countReview[1]
-            ]);
         }
         return $this->render('front/show.html.twig', [
             'errors' => [
                 'Votre saisie ne correspond pas à un lien',
             ],
             'link' => $link,
+            'score' => ['textColor' =>0, 'backgroundColor' => 0 ,'value' => 0],
         ]);
     }
 }
