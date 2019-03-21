@@ -26,3 +26,12 @@
   object-position: center right;
   margin-left: 10px;
 }
+
+@media screen and (max-width: 800px) {
+  .profil-card{
+    display: grid;
+    text-align: center;
+    width:auto;
+    margin-right: 25px;
+  }
+}
