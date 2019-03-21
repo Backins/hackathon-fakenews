@@ -10,12 +10,18 @@ import 'bootstrap';
 require('../css/app.scss');
 
 
-let menu = document.getElementById('newscan-menu');
+let menuOpen = document.getElementById('newscan-menu');
+let menuClose = document.getElementById('close-menu');
+let menu = document.getElementById('hidden-menu');
 
-menu.addEventListener('click', onClick);
+menuOpen.addEventListener('click', openMenu);
+menuClose.addEventListener('click', closeMenu);
 
-function onClick(event) {
-    console.log('coucou');
+function openMenu(event) {
+    menu.style.display = "block";
+}
+function closeMenu(event) {
+    menu.style.display = "none";
 }
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.

@@ -82,3 +82,68 @@
         {% endif %}
     </ul>
 </nav>
+
+<div id="hidden-menu" class="hidden-menu">
+    <div id="close-menu">
+        <i class="material-icons">
+            close
+        </i>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 n-container-image">
+                <img height="180" src="{{ asset('images/newsscan/svg/logo_mobile.svg') }}" alt="#">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="icon-logo-icone-12"></i>Scanner
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">help</i>Comment ça fonctionne ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">
+                                person
+                            </i>Qui sommes nous ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">
+                                note
+                            </i>
+                            Nos news
+                        </a>
+                    </li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li>
+                            <a href="{{ path('app_security_logout') }}" class="login">
+                                <i class="material-icons">
+                                    exit_to_app
+                                </i>
+                                Déconnexion
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('app_security_login') }}" class="login">
+                                <i class="material-icons">
+                                    exit_to_app
+                                </i>
+                                Connexion
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
