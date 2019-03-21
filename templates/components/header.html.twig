@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{{ path('app_default_index') }}">
         <img src="#" width="30" height="30" class="d-inline-block align-top" alt="">
         NewsScan
@@ -38,4 +38,47 @@
             {% endif %}
         </div>
     </div>
+</nav>-->
+<nav class="newsscan-navbar">
+    <div id="newscan-menu" class="n-burger-menu">
+        <i class="material-icons">
+            menu
+        </i>
+    </div>
+    <div class="newsscan-navbar-logo">
+        <a href="{{ path('app_default_index') }}">
+            <img height="60" src="{{ asset('images/newsscan/svg/logo_web.svg') }}" alt="">
+        </a>
+    </div>
+    <ul class="newsscan-navbar-ul">
+        <li {% if app.request.get('_route') == 'app_default_index' %} class="active"{% endif %}>
+            <a href="{{ path('app_default_index') }}">Scanner</a>
+        </li>
+        <li {% if app.request.get('_route') == 'app_default_whoareus' %} class="active"{% endif %}>
+            <a href="{{ path('app_default_whoareus') }}">Comment ça fonctionne ?</a>
+        </li>
+        <li>
+            <a href="#">Qui sommes nous ?</a>
+        </li>
+        <li>
+            <a href="#">Nos news</a>
+        </li>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <li>
+                <a href="{{ path('app_security_logout') }}" class="login">
+                    <button class="n-btn-primary">
+                        Déconnexion
+                    </button>
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ path('app_security_login') }}" class="login">
+                    <button class="n-btn-primary">
+                        Connexion
+                    </button>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
 </nav>

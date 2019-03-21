@@ -34,7 +34,7 @@ class DefaultController extends AbstractController
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route(path="/qui-somme-nous", name="index")
+     * @Route(path="/qui-somme-nous", name="whoareus")
      */
     public function WhoWeAre()
     {

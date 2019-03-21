@@ -20,21 +20,10 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class DefaultController
  * @package App\Controller
- * @Route(name="app_review_")
+ * @Route(path="/review", name="app_review_")
  */
 class ReviewController extends AbstractController
 {
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Route(path="/", name="index")
-     */
-    public function index($articleUrl)
-    {
-        return $this->render('review/index.html.twig', [
-            'articleUrl' => $articleUrl
-        ]);
-    }
-
     /**
      * @param Request $request
      * @IsGranted("ROLE_USER")
