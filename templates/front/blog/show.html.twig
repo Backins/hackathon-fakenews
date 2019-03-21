@@ -7,9 +7,13 @@
         <div class="row">
             <a href="{{ path('app_front_blog_index') }}" class="blue" >< Retour</a>
             <h1 class="col-11">{{ blog.title }}</h1>
-
+            <label class="col-12">{{ blog.createdAt |date("d/m/Y") }}</label>
+            <div class="col-12" style="margin: 15px">
+                <img  src="{{ asset('images/newsscan/fake_news.png') }}" width="400px" height="200px" >
+            </div>
+            <p class="col-12">{{ blog.body }}</p>
         </div>
-        <label>{{ blog.createdAt |date("d/m/Y") }}</label>
-        <p>{{ blog.body }}</p>
+
+
     </div>
 {% endblock %}
