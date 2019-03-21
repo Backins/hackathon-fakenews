@@ -3,14 +3,24 @@
 {% block title %}NewsScan - Admin Blog{% endblock %}
 
 {% block main %}
-    <h1>Blog index</h1>
-    {% for blog in blogs %}
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{ blog.title }}</h5>
-                <p class="card-text"{{ blog.body }}</p>
-                <a href="{{ path('app_front_blog_show', {'id': blog.id}) }}" class="btn btn-primary">Voir</a>
-            </div>
-        </div>
-    {% endfor %}
+    <div class="container" style="text-align: center">
+        <h1 style="margin: 30px;">Nos news</h1>
+
+        {% for blog in blogs %}
+                <div class="card-article" style="width: 400px;height: 200px;background-color: rgba(0, 0, 0, 0.5);">
+                    <img src="https://www.sante-sur-le-net.com/wp-content/uploads/2017/06/morsure-chien-enfants.jpg" width="100%">
+                    <a href="{{ path('app_front_blog_show', {'id': blog.id}) }}">
+
+                        <div class="card-article-body">
+                            <label><b>{{blog.title }}</b></label>
+                            <p >{{ blog.createdAt |date("d/m/Y")}}</p>
+
+                        </div>
+                    </a>
+
+                </div>
+
+        {% endfor %}
+    </div>
+
 {% endblock %}
