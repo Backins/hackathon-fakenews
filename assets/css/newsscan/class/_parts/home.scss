@@ -1,6 +1,9 @@
-div.n-logo-home {
-  text-align: center;
+div.n-first-row-home {
   margin-top: 80px;
+  img#n-logo-home-img {
+    display: block;
+    margin: auto;
+  }
 }
 
 div.form-group {
@@ -20,5 +23,10 @@ div.form-group {
   }
 }
 form.n-home-form {
+  text-align: center;
+}
+
+div#n-analyse {
+  display: none;
   text-align: center;
 }

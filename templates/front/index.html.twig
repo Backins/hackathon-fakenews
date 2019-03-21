@@ -3,28 +3,45 @@
 {% block title %}NewsScan - Accueil{% endblock %}
 
 {% block main %}
-        <div class="row">
-            <div class="offset-md-3 col-md-6 col-12 n-logo-home">
-                <img height="300" src="{{ asset('images/newsscan/svg/logo_home.svg') }}" alt="Logo Newscan">
+    <div class="row">
+        <div class="offset-md-3 col-md-6 col-12 n-first-row-home">
+            <img id="n-logo-home-img" height="300" src="{{ asset('images/newsscan/svg/logo_home.svg') }}" alt="Logo Newscan">
+            <div id="n-analyse">
+                <img height="300" src="{{ asset('images/newsscan/LogoAnimeFinal.gif') }}" alt="Logo Newscan animated">
+                <h3>Analyse de l'article en cours.</h3>
             </div>
         </div>
-        <div class="row">
-            <div class="offset-md-3 col-md-6 col-12">
-                <form action="{{ path('app_default_show') }}" method="post" class="n-home-form">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="material-icons">
-                                        search
-                                    </i>
-                                </div>
+    </div>
+    <div class="row">
+        <div class="offset-md-3 col-md-6 col-12">
+            <form action="{{ path('app_default_show') }}" method="post" class="n-home-form">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="material-icons">
+                                    search
+                                </i>
                             </div>
-                            <input id="n-input-link-home" type="text" class="form-control" id="inlineFormInputGroup" placeholder="Saisissez votre lien">
                         </div>
+                        <input id="n-input-link-home" type="text" class="form-control" placeholder="Saisissez votre lien" name="linkSearch" required="required">
                     </div>
-                    <button id="n-button-home" type="submit" class="btn n-btn-secondary text-light">SCANNER</button>
-                </form>
-            </div>
+                </div>
+                <button id="n-button-home" type="submit" class="btn n-btn-secondary text-light">SCANNER</button>
+            </form>
         </div>
+    </div>
+    <script>
+        let button = document.getElementById('n-button-home');
+        let imgLogo = document.getElementById('n-logo-home-img');
+        let blocLogoAnimated = document.getElementById('n-analyse');
+
+        button.addEventListener('click', onClickSearch);
+
+        function onClickSearch()
+        {
+            imgLogo.style.display = "none";
+            blocLogoAnimated.style.display = "block";
+        }
+    </script>
 {% endblock %}
