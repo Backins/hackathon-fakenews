@@ -10,7 +10,8 @@ header{
   }
   nav.newsscan-navbar {
     display: flex;
-    max-width: 960px;
+    justify-content: space-between;
+    max-width: 1300px;
     margin: auto;
     ul.newsscan-navbar-ul {
       margin-left: 90px;
