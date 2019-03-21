@@ -55,6 +55,10 @@
   font-size: 11px;
 }
 
+.blue {
+  color: $colorNewsScanLightBlue;
+}
+
 @media screen and (max-width: 800px) {
   .profil-card{
     display: grid;

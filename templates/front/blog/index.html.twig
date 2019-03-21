@@ -8,7 +8,7 @@
 
         {% for blog in blogs %}
                 <div class="card-article" style="width: 400px;height: 200px;background-color: rgba(0, 0, 0, 0.5);">
-                    <img src="https://www.sante-sur-le-net.com/wp-content/uploads/2017/06/morsure-chien-enfants.jpg" width="100%">
+                    <img src="{{ asset('images/newsscan/fake_news.png') }}" width="100%">
                     <a href="{{ path('app_front_blog_show', {'id': blog.id}) }}">
 
                         <div class="card-article-body">
