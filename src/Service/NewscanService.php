@@ -84,12 +84,6 @@ class NewscanService
         }
         return $arrayReturn;
     }
-//
-//    private function callApi($url)
-//    {
-//        $response = file_get_contents($url);
-//        return json_decode($response);
-//    }
 
     private function callApi($url,$type = 'GET',$data = [])
     {
