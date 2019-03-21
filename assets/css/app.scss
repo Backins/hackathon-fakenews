@@ -8,12 +8,17 @@
 }
 html, body {
     background-color: $colorNewsScanLightWhite;
+    color: #131b2b;
 }
 body {
     font-size: 14px;
     font-family: 'Raleway', sans-serif;
 }
 
+h1 {
+    font-weight: 600;
+    font-style: normal;
+}
 
 @import "override/boostrap";
 @import "newsscan/class/class";

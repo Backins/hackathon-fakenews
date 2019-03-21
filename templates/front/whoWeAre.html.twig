@@ -1,17 +1,60 @@
-{% extends 'base.html.twig' %}
+{% extends 'front_base.html.twig' %}
 
 {% block title %}Qui somme nous ?{% endblock %}
 
-{% block body %}
-    <main>
-        <p>L’équipe NewScan a vu le jour lors du Hackathon 2019 regroupant l’ESGI, l’ECITV, l’ICAN et PSVA. Elle rassemble 2 développeurs de l’ESGI, 2 designers de l’ICAN et un marketeur de l’ECITV.
+{% block main %}
+    <div class="container">
+        <h1 style="text-align: center;margin: 30px;">Qui sommes nous ?</h1>
 
-            Nous avions le désir de répondre à un problème que beaucoup d’entre nous rencontrent : Comment savoir si un article est fiable ou non ?
+        <div style="margin: 40px">
+            <p>L’équipe <b>NewScan</b> a vu le jour lors du Hackathon 2019 regroupant l’ESGI, l’ECITV, l’ICAN et PSVA. Elle rassemble 2 développeurs de l’ESGI, 2 designers de l’ICAN et un marketeur de l’ECITV.</p>
 
-            Grâce aux compétences de chacun d’entre nous, nous avons développé un outil permettant de calculer un score de fiabilité en fonction de plusieurs critères de qualité rédactionnelle. Il sera donc plus simple de déterminer si un article a l’air fiable ou non.
+            <p>Nous avions le désir de répondre à un problème que beaucoup d’entre nous rencontrent : </p>
+            <b>Comment savoir si un article est fiable ou non ?</b>
 
-            Attention : Newscan ne donne pas de jugement définitif sur la fiabilité d'un article, il donne uniquement un indice de fiabilité à l'utilisateur pour l'orienter dans son jugement de l'article.</p>
-    </main>
+            <p>Grâce aux compétences de chacun d’entre nous, nous avons développé un outil permettant de calculer un score de fiabilité en fonction de plusieurs critères de qualité rédactionnelle. Il sera donc plus simple de déterminer si un article a l’air fiable ou non.</p>
+
+            <p><b>Attention</b> : Newscan ne donne pas de jugement définitif sur la fiabilité d'un article, il donne uniquement un indice de fiabilité à l'utilisateur pour l'orienter dans son jugement de l'article.</p>
+        </div>
+
+        <div>
+            <div class="row" style="display: flex;justify-content: center;">
+                <div class="profil-card">
+                    <img src="https://www.sciencesetavenir.fr/assets/img/2017/03/29/cover-r4x3w1000-58dbbd655242b-capture-d-e-cran-2017-03-29-a-15-55-40.png" class="profil-img">
+                    <b>Dylan correia</b>
+                    <label>Développeur</label>
+                </div>
+                <div class="profil-card">
+                    <img src="https://www.sciencesetavenir.fr/assets/img/2017/03/29/cover-r4x3w1000-58dbbd655242b-capture-d-e-cran-2017-03-29-a-15-55-40.png" class="profil-img">
+                    <b>Issam Mouh</b>
+                    <label>Marketeur</label>
+                </div>
+            </div>
+            <div class="row" style="display: flex;justify-content: center;">
+                <div class="profil-card row">
+                    <img src="https://www.sciencesetavenir.fr/assets/img/2017/03/29/cover-r4x3w1000-58dbbd655242b-capture-d-e-cran-2017-03-29-a-15-55-40.png" class="profil-img-chef">
+                    <b>Julien Domange</b>
+                    <label style=" margin-bottom: 0;">Chef de projet</label>
+                    <label >Développeur</label>
+
+                </div>
+            </div>
+            <div class="row" style="display: flex;justify-content: center;">
+                <div class="profil-card">
+                    <img src="https://www.sciencesetavenir.fr/assets/img/2017/03/29/cover-r4x3w1000-58dbbd655242b-capture-d-e-cran-2017-03-29-a-15-55-40.png" class="profil-img">
+                    <b>Lorette Masson</b>
+                    <label>UI/UX Designer</label>
+                </div>
+                <div class="profil-card">
+                    <img src="https://www.sciencesetavenir.fr/assets/img/2017/03/29/cover-r4x3w1000-58dbbd655242b-capture-d-e-cran-2017-03-29-a-15-55-40.png" class="profil-img">
+                    <b>Bénédicte Roberto</b>
+                    <label>UI/UX Designe</label>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 {% endblock %}
 
 {% block javascripts %}
