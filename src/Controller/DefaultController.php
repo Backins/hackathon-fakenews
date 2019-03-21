@@ -33,6 +33,15 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route(path="/qui-somme-nous", name="index")
+     */
+    public function WhoWeAre()
+    {
+        return $this->render('front/whoWeAre.html.twig');
+    }
+
+    /**
      * @param $article
      * @Route(path="/show", name="show", methods={"POST"})
      */
