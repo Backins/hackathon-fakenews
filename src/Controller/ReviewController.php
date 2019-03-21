@@ -10,12 +10,11 @@ namespace App\Controller;
 
 
 use App\Entity\Review;
-use App\Service\NewscanService;
-use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class DefaultController
@@ -39,7 +38,14 @@ class ReviewController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($Review);
             $entityManager->flush();
+            $response = new Response(json_encode(array('status' => "ok", 'data' => $link)));
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
         }
-        return $this->redirectToRoute("app_default_index");
+        $response = new Response(json_encode(array('status' => "erreur")));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 }

@@ -33,21 +33,22 @@
                     <h4>Votre article est fiable à : <span class="text-newsscan-blue">{{ articleScore * 100 }}%</span></h4>
                     <svg id="fillgauge1" width="97%" height="250"></svg>
                 </div>
-                <div>
+                <div class="newsfaker-information">
                     {% if user %}
                         {% if not findVote %}
-                            {{ render(controller(
-                                'App\\Controller\\ReviewController::index', {
-                                    articleUrl: article.pageUrl
-                                }
-                            )) }}
+                            <a href="#" class="btn-faker newsscan-center-div" onclick="return sendReview();">
+                                <i class="icon-thumb-down"></i>
+                            </a>
+                            <p>0 fakes</p>
                         {% else %}
                             <p>Vous avez déjà contribué</p>
                         {% endif %}
                     {% else %}
-                        <a href="#" class="btn-faker disabled">
+                        <p>Pour contribuer, il faut vous <a href="{{ path('app_security_login') }}">connecter</a> !</p>
+                        <a href="#" class="btn-faker disabled newsscan-center-div" onclick="return false;">
                             <i class="icon-thumb-down"></i>
                         </a>
+                        <p>0 fakes</p>
                     {%  endif %}
                 </div>
             </div>
@@ -119,6 +120,24 @@
             } else {
                 return (Math.random()*100).toFixed(1);
             }
+        }
+
+        function sendReview(){
+            let dataInformation = {
+                urlArticle: "{{ link }}"
+            };
+            initiateAPi("{{path('app_review_add')}}", dataInformation);
+
+            return false;
+        }
+        function initiateAPi(route, payload) {
+            $.ajax({
+                url: route,
+                type: 'POST',
+                data: payload
+            }).done(function(res) {
+                return res;
+            });
         }
     </script>
 {% endblock %}

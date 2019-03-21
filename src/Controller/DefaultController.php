@@ -74,7 +74,8 @@ class DefaultController extends AbstractController
                 'article' => $targetArticle,
                 'user' => $user,
                 'findVote' => $findVote,
-                'articleScore' => $articleScore
+                'articleScore' => $articleScore,
+                'link' => $link,
             ]);
         }
         return $this->render('front/show.html.twig', [

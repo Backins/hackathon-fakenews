@@ -24,6 +24,11 @@
   height: 45px;
   border-radius: 100%;
   display: flex;
+  color: $colorNewsScanLightWhite;
+  background-color: $colorNewsScanLightBlue;
+  &:hover {
+    color: $colorNewsScanLightWhite;
+  }
   > i {
     margin: auto;
     font-size: 24px;
