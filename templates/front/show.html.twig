@@ -36,7 +36,7 @@
                 <div class="newsfaker-information">
                     {% if user %}
                         {% if not findVote %}
-                            <a href="#" class="btn-faker newsscan-center-div" onclick="return sendReview();">
+                            <a href="#" class="btn-faker newsscan-center-div" style="background-color: {{ score.backgroundColor }};" onclick="return sendReview();">
                                 <i class="icon-thumb-down"></i>
                             </a>
                             <p>0 fakes</p>
@@ -108,23 +108,19 @@
 {% block javascripts %}
     <script>
         var config1 = liquidFillGaugeDefaultSettings();
-        config1.circleColor = "#26B0BD";
-        config1.textColor = "#FFFFFF";
-        config1.waveTextColor = "#FFFFFF";
-        config1.waveColor = "#26B0BD";
+        config1.circleColor = "{{ score.backgroundColor }}"
+        ;
+        config1.textColor = "{{ score.textColor }}"
+        ;
+        config1.waveTextColor = "{{ score.textColor }}"
+        ;
+        config1.waveColor = "{{ score.backgroundColor }}"
+        ;
         config1.circleThickness = 0.05;
         config1.textVertPosition = 0.5;
         config1.waveHeight = 0.25;
         config1.waveAnimateTime = 950;
-        var gauge1 = loadLiquidFillGauge("fillgauge1", {{ articleScore * 100 }}, config1);
-
-        function NewValue(){
-            if(Math.random() > .5){
-                return Math.round(Math.random()*100);
-            } else {
-                return (Math.random()*100).toFixed(1);
-            }
-        }
+        var gauge1 = loadLiquidFillGauge("fillgauge1", {{ score.value * 100 }}, config1);
 
         function sendReview(){
             let dataInformation = {

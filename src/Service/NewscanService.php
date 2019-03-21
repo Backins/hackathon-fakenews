@@ -25,6 +25,12 @@ class NewscanService
     const COEFF_ARTICLE_MISTAKE = 3;
     const COEFF_FAKE_REVIEW = 1;
 
+    const SCORE_CONFIANCE = 70;
+    const SCORE_CONFIANCE_COLOR = "#26B0BD";
+    const SCORE_MOYEN = 35;
+    const SCORE_MOYEN_COLOR = "#F8A931";
+    const SCORE_MAUVAIS_COLOR = "#E7334D";
+
     public $targetSourceRepository;
     public $reviewRepository;
 
@@ -138,8 +144,24 @@ class NewscanService
         $reviews = $this->reviewRepository->findBy(['urlArticle' =>$article->pageUrl]);
         $score+= self::NOTE * count($reviews) * 0.5 * self::COEFF_FAKE_REVIEW;
 
-        $scorePercent = (self::COEFF_DOUBTFUL_DOMAIN * 4) / $score;
-        return  $scorePercent < 0 ? 0 : $scorePercent;
+        $scoreResult = (self::COEFF_DOUBTFUL_DOMAIN * 4) / $score;
+        $backgroundColor = self::SCORE_CONFIANCE_COLOR;
+        $textColor = "#FFF";
+        $scorePercent = $scoreResult * 100;
+        if($scorePercent < self::SCORE_CONFIANCE) {
+            $backgroundColor = self::SCORE_MOYEN_COLOR;
+        }
+        if($scorePercent < self::SCORE_MOYEN) {
+            $backgroundColor = self::SCORE_MAUVAIS_COLOR;
+        }
+        if($scorePercent < 60){
+            $textColor = "#1B2439";
+        }
+        return  [
+            "value" => $scoreResult < 0 ? 0 : $scoreResult,
+            "textColor" => $textColor,
+            "backgroundColor" => $backgroundColor,
+        ];
     }
 
     private function calculMistakesMatches($mistakeMatches,$nbMistakes){

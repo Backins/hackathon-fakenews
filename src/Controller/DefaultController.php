@@ -76,7 +76,7 @@ class DefaultController extends AbstractController
                 }
             }
 
-            $articleScore = $newscanService->calculArticleConfidenceLevel($targetArticle);
+            $score = $newscanService->calculArticleConfidenceLevel($targetArticle);
 
             $topics = $newscanService->getTopicsArticle($targetArticle->tags);
 
@@ -85,7 +85,7 @@ class DefaultController extends AbstractController
                 'article' => $targetArticle,
                 'user' => $user,
                 'findVote' => $findVote,
-                'articleScore' => $articleScore,
+                'score' => $score,
                 'link' => $link,
                 'source' => $source,
             ]);
