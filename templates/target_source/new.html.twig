@@ -1,11 +1,26 @@
-{% extends 'base.html.twig' %}
+{% extends 'front_base.html.twig' %}
 
 {% block title %}New TargetSource{% endblock %}
 
-{% block body %}
-    <h1>Create new TargetSource</h1>
-
-    {{ include('target_source/_form.html.twig') }}
-
-    <a href="{{ path('target_source_index') }}">back to list</a>
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ path('target_source_index') }}">Liste des domaines</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Insérer un nouveau domaine</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-md-2 col-md-8 col-12">
+                <h1>Insérer un nouveau domaine</h1>
+                <div class="form-group">
+                    {{ include('target_source/_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
