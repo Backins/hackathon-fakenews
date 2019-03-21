@@ -138,8 +138,8 @@ class NewscanService
         $host = parse_url($article->pageUrl)['host'];
         $domain = str_replace("www.", "", $host);
         $targetSource = $this->targetSourceRepository->findOneBy(['domain' =>$domain]);
-
-        $score+= self::NOTE * $targetSource->getConfidenceLevel() * self::COEFF_DOUBTFUL_DOMAIN;
+        $level = $targetSource ? $targetSource->getConfidenceLevel() : 0 ;
+        $score+= self::NOTE * $level * self::COEFF_DOUBTFUL_DOMAIN;
 
         $reviews = $this->reviewRepository->findBy(['urlArticle' =>$article->pageUrl]);
         $score+= self::NOTE * count($reviews) * 0.5 * self::COEFF_FAKE_REVIEW;
@@ -157,8 +157,13 @@ class NewscanService
         if($scorePercent < 60){
             $textColor = "#1B2439";
         }
+        if($scoreResult < 0){
+            $scoreResult = 0;
+        } elseif($scoreResult > 1){
+            $scoreResult = 0.99;
+        }
         return  [
-            "value" => $scoreResult < 0 ? 0 : $scoreResult,
+            "value" => $scoreResult ,
             "textColor" => $textColor,
             "backgroundColor" => $backgroundColor,
         ];
