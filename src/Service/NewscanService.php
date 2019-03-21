@@ -42,15 +42,31 @@ class NewscanService
         return $response;
     }
 
+    private function getBestTopics($topics)
+    {
+        $score = [];$data = [];
+        foreach ($topics as $topic){
+            $score[]=$topic->score;
+        }
+        arsort($score);
+        foreach($score as $k => $s)
+        {
+            $data[] = $topics [$k];
+        }
+
+        return array_splice($data, 0, 1);
+    }
+
     public function getTopicsArticle($topics)
     {
         $date = new \DateTime();
         $now = $date->format('Ymd');
-        $date->setTimestamp(mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
+        $date->setTimestamp(mktime(0, 0, 0, date("m"), date("d")-3,   date("Y")));
         $threeMonth = $date->format('Ymd');
         $arrayReturn = [];
 
-        $topics = array_splice($topics, 0, 3);
+        $topics = self::getBestTopics($topics);
+
         foreach($topics as $topic){
             $url = "https://api.ozae.com/gnw/articles?date=".$threeMonth."__".$now."&key=".self::OZAEKEY."&edition=fr-fr&query=".urlencode($topic->label)."&hard_limit=4";
             $response = $this->callApi($url);

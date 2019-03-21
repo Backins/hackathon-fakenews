@@ -52,7 +52,6 @@ class DefaultController extends AbstractController
         if (filter_var($link, FILTER_VALIDATE_URL)) {
             $response = $newscanService->getArticle($link);
             $targetArticle = $response->objects[0];
-
             $topics = $newscanService->getTopicsArticle($targetArticle->tags);
             $user = $this->getUser();
             $findVote = false;

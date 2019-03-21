@@ -1,15 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'front_base.html.twig' %}
 
-{% block title %}Index Front{% endblock %}
+{% block title %}NewsScan - Résultat d'analyse{% endblock %}
 
-{% block body %}
-    <main>
-        <p>Accueil</p>
-        <a class="btn btn-primary" href="{{ path('app_security_login') }}">Login</a>
-        <a class="btn btn-danger" href="{{ path('app_security_logout') }}">Logout</a>
+{% block main %}
 
-        <section>
-            {% if errors is defined %}
+    {% if errors is defined %}
+        <section class="row">
+            <div class="offset-md-3 col-md-6 col-12">
                 <div class="alert alert-danger" role="alert">
                     <h2>Oops ! Il semble y avoir un problème : </h2>
                     {% for error in errors %}
@@ -17,51 +14,65 @@
                     {% endfor %}
                     <p><em>Voici votre saisie : {{ link }}</em></p>
                 </div>
-            {% endif %}
+            </div>
         </section>
-        <section>
-            {#{{ dump(article) }}#}
+    {% else %}
+        <section class="row">
+            <div class="col-12">
+                <h1 class="text-center">Résultat</h1>
+            </div>
+            <div class="col-12 content-targeted-article">
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.siteName|lower }}</p>
+                <p>{{ article.date|date("d/m/Y") }}</p>
+            </div>
         </section>
-        <section>
-            <label>Score : </label>{{ articleScore * 100 }} %
-        </section>
-        <section>
-            {% if user %}
-                {% if not findVote %}
-                    {{ render(controller(
-                        'App\\Controller\\ReviewController::index', {
-                            articleUrl: article.pageUrl
-                        }
-                    )) }}
-                {% else %}
-                    <p>Vous avez déjà contribué</p>
-                {% endif %}
-            {% else %}
-                <p>Pour contribuer, veuillez vous connecter</p>
-            {%  endif %}
-        </section>
-        <section style="width: 750px;">
-            <h2>Principaux topics de votre article</h2>
-            <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    {% for topic in topics %}
-                        <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-{{ topic.labelUrl }}" role="tab" aria-controls="nav-home" aria-selected="true">{{ topic.label }}</a>
-                    {% else %}
-                        <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-nothing" role="tab" aria-controls="nav-home" aria-selected="true">Pas de correspondance</a>
-                    {% endfor %}
+        <section class="row">
+            <div class="col-lg-6 col-12">
+                <div>
+                    <h4>Votre article est fiable à : <span class="text-newsscan-blue">{{ articleScore * 100 }}%</span></h4>
+                    <svg id="fillgauge1" width="97%" height="250"></svg>
                 </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent">
-                {% for topic in topics %}
-                    <div class="tab-pane fade" id="nav-{{ topic.labelUrl }}" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <table class="table">
-                            <thead>
+                <div>
+                    {% if user %}
+                        {% if not findVote %}
+                            {{ render(controller(
+                                'App\\Controller\\ReviewController::index', {
+                                    articleUrl: article.pageUrl
+                                }
+                            )) }}
+                        {% else %}
+                            <p>Vous avez déjà contribué</p>
+                        {% endif %}
+                    {% else %}
+                        <a href="#" class="btn-faker disabled">
+                            <i class="icon-thumb-down"></i>
+                        </a>
+                    {%  endif %}
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <h4>Les principaux sujets de votre article</h4>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        {% for topic in topics %}
+                            <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-{{ topic.labelUrl }}" role="tab" aria-controls="nav-home" aria-selected="true">{{ topic.label }}</a>
+                        {% else %}
+                            <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-nothing" role="tab" aria-controls="nav-home" aria-selected="true">Pas de correspondance</a>
+                        {% endfor %}
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    {% for topic in topics %}
+                        <div class="tab-pane fade" id="nav-{{ topic.labelUrl }}" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <table class="table">
+                                <thead>
                                 <tr>
                                     <th scope="col">Source</th>
                                     <th scope="col">Titre</th>
                                 </tr>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
                                 {% for article in topic.ozaeArticles.articles %}
                                     <tr>
                                         <th scope="row">{{ article.source.domain }}</th>
@@ -72,18 +83,42 @@
                                         <td colspan="2">Oops ! Aucun article trouvé.</td>
                                     </tr>
                                 {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                {% else %}
-                    <div class="tab-pane fade show active" id="nav-nothing" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <p>Désolé, nous n'avons pas trouvé de mot clé pour cet article.</p>
-                    </div>
-                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="tab-pane fade show active" id="nav-nothing" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <p>Désolé, nous n'avons pas trouvé de mot clé pour cet article.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p>Vous souhaitez en savoir plus sur notre fonctionnement ? <a href="#">Cliquez-ici</a></p>
+                </div>
             </div>
         </section>
-    </main>
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}
+    <script>
+        var config1 = liquidFillGaugeDefaultSettings();
+        config1.circleColor = "#26B0BD";
+        config1.textColor = "#FFFFFF";
+        config1.waveTextColor = "#FFFFFF";
+        config1.waveColor = "#26B0BD";
+        config1.circleThickness = 0.05;
+        config1.textVertPosition = 0.5;
+        config1.waveHeight = 0.25;
+        config1.waveAnimateTime = 950;
+        var gauge1 = loadLiquidFillGauge("fillgauge1", {{ articleScore * 100 }}, config1);
+
+        function NewValue(){
+            if(Math.random() > .5){
+                return Math.round(Math.random()*100);
+            } else {
+                return (Math.random()*100).toFixed(1);
+            }
+        }
+    </script>
 {% endblock %}

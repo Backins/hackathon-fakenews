@@ -20,3 +20,18 @@
   border: solid 2.5px #1fa3af;
   background-color: #ffffff;
 }
+.btn-faker {
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  display: flex;
+  > i {
+    margin: auto;
+    font-size: 24px;
+  }
+  &.disabled {
+    cursor: text;
+    color: $colorNewsScanLightWhite;
+    background-color: $colorNewsScanBlack;
+  }
+}
