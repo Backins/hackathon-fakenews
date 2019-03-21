@@ -1,0 +1,24 @@
+div.n-logo-home {
+  text-align: center;
+  margin-top: 80px;
+}
+
+div.form-group {
+  div.input-group {
+    margin-top: 45px;
+    div.input-group-text{
+      border-top-left-radius: 19.5px;
+      border-bottom-left-radius: 19.5px;
+    }
+    input#n-input-link-home {
+      border-top-right-radius: 19.5px;
+      border-top-left-radius: 0;
+      border-bottom-right-radius: 19.5px;
+      border-bottom-left-radius: 0;
+      background-color: rgba(142, 142, 147, 0.12);
+    }
+  }
+}
+form.n-home-form {
+  text-align: center;
+}
