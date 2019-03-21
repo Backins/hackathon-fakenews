@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'front_base.html.twig' %}
 
 {% block title %}TargetSource index{% endblock %}
 
-{% block body %}
+{% block main %}
     <h1>TargetSource index</h1>
 
     <table class="table">
@@ -21,17 +21,17 @@
                 <td>{{ target_source.domain }}</td>
                 <td>{{ target_source.confidenceLevel }}</td>
                 <td>
-                    <a href="{{ path('target_source_show', {'id': target_source.id}) }}">show</a>
-                    <a href="{{ path('target_source_edit', {'id': target_source.id}) }}">edit</a>
+                    <a class="btn-sm btn-info" href="{{ path('target_source_edit', {'id': target_source.id}) }}">Modifier</a>
+                    <a onclick="return confirm('Voulez-vous supprimer cette source ?');" class="btn-sm btn-danger" href="{{ path('target_source_delete', {'id': target_source.id}) }}">Supprimer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">Aucune source trouvée</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('target_source_new') }}">Create new</a>
+    <a href="{{ path('target_source_new') }}" class="btn btn-primary">Créer une nouvelle source</a>
 {% endblock %}

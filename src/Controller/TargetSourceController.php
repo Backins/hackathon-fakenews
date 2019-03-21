@@ -52,13 +52,13 @@ class TargetSourceController extends AbstractController
 
     /**
      * @Route("/{id}", name="target_source_show", methods={"GET"})
-     */
+
     public function show(TargetSource $targetSource): Response
     {
         return $this->render('target_source/show.html.twig', [
             'target_source' => $targetSource,
         ]);
-    }
+    }*/
 
     /**
      * @Route("/{id}/edit", name="target_source_edit", methods={"GET","POST"})
@@ -83,15 +83,13 @@ class TargetSourceController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="target_source_delete", methods={"DELETE"})
+     * @Route("/delete/{id}", name="target_source_delete", methods={"GET"})
      */
     public function delete(Request $request, TargetSource $targetSource): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$targetSource->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($targetSource);
-            $entityManager->flush();
-        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($targetSource);
+        $entityManager->flush();
 
         return $this->redirectToRoute('target_source_index');
     }
