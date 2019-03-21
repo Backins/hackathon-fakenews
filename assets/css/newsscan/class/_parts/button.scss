@@ -1,15 +1,20 @@
 .n-btn-primary {
   padding: 3px 15px;
   border-radius: 18px;
-  border: solid 1px $colorNewsScanLightBlue;
-  background-color: #ffffff;
+  border: solid 2px $colorNewsScanLightBlue;
+  background-color: transparent;
+  color: $colorNewsScanLightBlue ;
+  padding-left: 45px;
+  padding-right: 45px;
+  width: auto;
 }
 
 .n-btn-secondary {
-  width: 125px;
   height: 35px;
   border-radius: 18.5px;
   background-color: $colorNewsScanLightBlue;
+  padding-left: 45px;
+  padding-right: 45px;
 }
 
 .n-btn-thirdly  {

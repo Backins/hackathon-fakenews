@@ -19,6 +19,23 @@ body {
 h1 {
     font-weight: 600;
     font-style: normal;
+    margin: 30px;
+}
+
+.input {
+    width: 260px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: rgba(142, 142, 147, 0.12);
+    margin: 15px auto;
+}
+
+.vl {
+    border-top: 1px solid $colorNewsScanLightBlue;
+    width: 200px;
+    height: 2px;
+    height: 2px;
+    margin-top: 10px;
 }
 
 @import "override/boostrap";
