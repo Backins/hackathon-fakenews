@@ -1,7 +1,7 @@
 .idea/
 .docker/
 .env/
-/public/builds/
+/public/build/
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
