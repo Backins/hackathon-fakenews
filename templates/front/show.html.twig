@@ -1,6 +1,6 @@
 {% extends 'front_base.html.twig' %}
 
-{% block title %}NewsScan - Résultat d'analyse{% endblock %}
+{% block title %}Résultat d'analyse{% endblock %}
 
 {% block main %}
 
@@ -17,20 +17,20 @@
             </div>
         </section>
     {% else %}
-        <section class="row">
+        <section id="n-content-article" class="row">
             <div class="col-12">
                 <h1 class="text-center">Résultat</h1>
             </div>
-            <div class="col-12 content-targeted-article">
-                <h3>{{ article.title }}</h3>
-                <p>{{ article.siteName|lower }}</p>
-                <p>{{ article.date|date("d/m/Y") }}</p>
+            <div class="col-12 n-content-targeted-article">
+                <h4>{{ article.title }}</h4>
+                <p>Source : <a href="{{ source }}">{{ source }}</a></p>
+                <p>Date : {{ article.date|date("d/m/Y") }}</p>
             </div>
         </section>
-        <section class="row">
+        <section id="n-content-score" class="row">
             <div class="col-lg-6 col-12">
-                <div>
-                    <h4>Votre article est fiable à : <span class="text-newsscan-blue">{{ articleScore * 100 }}%</span></h4>
+                <div class="n-article-content">
+                    <h5>Votre article est fiable à</h5>
                     <svg id="fillgauge1" width="97%" height="250"></svg>
                 </div>
                 <div class="newsfaker-information">
@@ -41,7 +41,11 @@
                             </a>
                             <p>0 fakes</p>
                         {% else %}
-                            <p>Vous avez déjà contribué</p>
+                            <p>Vous avez déjà contribué.</p>
+                            <a href="#" class="btn-faker disabled newsscan-center-div" onclick="return false;">
+                                <i class="icon-thumb-down"></i>
+                            </a>
+                            <p>0 fakes</p>
                         {% endif %}
                     {% else %}
                         <p>Pour contribuer, il faut vous <a href="{{ path('app_security_login') }}">connecter</a> !</p>
@@ -53,7 +57,7 @@
                 </div>
             </div>
             <div class="col-lg-6 col-12">
-                <h4>Les principaux sujets de votre article</h4>
+                <h5>Les principaux sujets de votre article</h5>
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         {% for topic in topics %}

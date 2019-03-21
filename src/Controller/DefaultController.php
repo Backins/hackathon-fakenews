@@ -59,6 +59,8 @@ class DefaultController extends AbstractController
     {
         $link = $request->request->get('linkSearch');
         if (filter_var($link, FILTER_VALIDATE_URL)) {
+            $source = parse_url($link);
+            $source = $source["scheme"].'://'.$source["host"];
             $response = $newscanService->getArticle($link);
             $targetArticle = $response->objects[0];
             $topics = $newscanService->getTopicsArticle($targetArticle->tags);
@@ -85,6 +87,7 @@ class DefaultController extends AbstractController
                 'findVote' => $findVote,
                 'articleScore' => $articleScore,
                 'link' => $link,
+                'source' => $source,
             ]);
         }
         return $this->render('front/show.html.twig', [
