@@ -84,15 +84,13 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
+     * @Route("/delete/{id}", name="delete", methods={"GET"})
      */
     public function delete(Request $request, Blog $blog): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$blog->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($blog);
-            $entityManager->flush();
-        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($blog);
+        $entityManager->flush();
 
         return $this->redirectToRoute('app_blog_index');
     }

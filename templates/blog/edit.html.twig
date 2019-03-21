@@ -1,13 +1,26 @@
-{% extends 'base.html.twig' %}
+{% extends 'front_base.html.twig' %}
 
 {% block title %}Edit Blog{% endblock %}
 
-{% block body %}
-    <h1>Edit Blog</h1>
-
-    {{ include('blog/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_blog_index') }}">back to list</a>
-
-    {{ include('blog/_delete_form.html.twig') }}
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ path('app_blog_index') }}">Liste des news</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Editer une news</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-md-2 col-md-8 col-12">
+                <h1>Editer une news</h1>
+                <div class="form-group">
+                    {{ include('blog/_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

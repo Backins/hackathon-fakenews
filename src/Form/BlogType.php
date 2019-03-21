@@ -15,11 +15,24 @@ class BlogType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('body', TextareaType::class)
+            ->add('title', TextType::class, [
+                'label' => 'Titre',
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+            ])
+            ->add('body', TextareaType::class, [
+                'label' => 'Contenu',
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+            ])
             ->add('published', CheckboxType::class, [
-                'label'    => 'Publié l\'article ?',
-                'required' => false,
+                'label' => 'Publié l\'article ?',
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+                'required' => false
             ]);
         ;
     }
