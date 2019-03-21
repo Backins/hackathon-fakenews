@@ -51,6 +51,15 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route(path="/mentions-legales", name="mentions-legales")
+     */
+    public function mentionsLegales()
+    {
+        return $this->render('front/mentionsLegales.html.twig');
+    }
+
+    /**
      * @param $article
      * @Route(path="/show", name="show", methods={"POST"})
      */
