@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/blog", name="app_blog_")
+ * @Route("/admin/blog", name="app_blog_")
  * @IsGranted("ROLE_ADMIN")
  */
 class BlogController extends AbstractController

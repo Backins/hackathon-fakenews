@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block body %}
+    <h1>Blog</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{{ blog.title }}</td>
+            </tr>
+            <tr>
+                <th>Body</th>
+                <td>{{ blog.body }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+{% endblock %}
