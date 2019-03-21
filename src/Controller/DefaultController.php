@@ -63,7 +63,6 @@ class DefaultController extends AbstractController
             $source = $source["scheme"].'://'.$source["host"];
             $response = $newscanService->getArticle($link);
             $targetArticle = $response->objects[0];
-            $topics = $newscanService->getTopicsArticle($targetArticle->tags);
             $user = $this->getUser();
             $findVote = false;
             if($user){
@@ -75,6 +74,9 @@ class DefaultController extends AbstractController
                     $findVote = false;
                 }
             }
+
+            $em = $this->getDoctrine()->getManager();
+            $countReview = $em->getRepository(Review::class)->getCount($link);
 
             $score = $newscanService->calculArticleConfidenceLevel($targetArticle);
 
@@ -88,6 +90,7 @@ class DefaultController extends AbstractController
                 'score' => $score,
                 'link' => $link,
                 'source' => $source,
+                'nbVote' => $countReview[1]
             ]);
         }
         return $this->render('front/show.html.twig', [

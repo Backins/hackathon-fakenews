@@ -60,14 +60,14 @@ class NewscanService
             $data[] = $topics [$k];
         }
 
-        return array_splice($data, 0, 1);
+        return array_splice($data, 0, 3);
     }
 
     public function getTopicsArticle($topics)
     {
         $date = new \DateTime();
         $now = $date->format('Ymd');
-        $date->setTimestamp(mktime(0, 0, 0, date("m"), date("d")-3,   date("Y")));
+        $date->setTimestamp(mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
         $threeMonth = $date->format('Ymd');
         $arrayReturn = [];
 

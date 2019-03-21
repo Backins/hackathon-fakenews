@@ -36,15 +36,15 @@ class ReviewRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Review
+
+    public function getCount($value): array
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
+            ->select('COUNT(r.id)')
+            ->andWhere('r.urlArticle = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }

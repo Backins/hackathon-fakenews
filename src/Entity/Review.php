@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\TimestampableTrait;
 
 /**
- * @ORM\Entity(repositoryClass="ReviewRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ReviewRepository")
  * @ORM\Table(name="review")
  */
 class Review

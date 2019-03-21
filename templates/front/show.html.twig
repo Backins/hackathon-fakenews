@@ -33,27 +33,29 @@
                     <h5>Votre article est fiable à</h5>
                     <svg id="fillgauge1" width="97%" height="250"></svg>
                 </div>
-                <div class="newsfaker-information">
+                <div id="n-nombre-vote" class="newsfaker-information">
                     {% if user %}
                         {% if not findVote %}
                             <a href="#" class="btn-faker newsscan-center-div" style="background-color: {{ score.backgroundColor }};" onclick="return sendReview();">
                                 <i class="icon-thumb-down"></i>
                             </a>
-                            <p>0 fakes</p>
                         {% else %}
                             <p>Vous avez déjà contribué.</p>
                             <a href="#" class="btn-faker disabled newsscan-center-div" onclick="return false;">
                                 <i class="icon-thumb-down"></i>
                             </a>
-                            <p>0 fakes</p>
                         {% endif %}
                     {% else %}
                         <p>Pour contribuer, il faut vous <a href="{{ path('app_security_login') }}">connecter</a> !</p>
                         <a href="#" class="btn-faker disabled newsscan-center-div" onclick="return false;">
                             <i class="icon-thumb-down"></i>
                         </a>
-                        <p>0 fakes</p>
                     {%  endif %}
+                    {% if nbVote > 1 %}
+                        <p>{{ nbVote }} fakes</p>
+                    {% else %}
+                        <p>{{ nbVote }} fake</p>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-lg-6 col-12">
@@ -61,7 +63,7 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         {% for topic in topics %}
-                            <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-{{ topic.labelUrl }}" role="tab" aria-controls="nav-home" aria-selected="true">{{ topic.label }}</a>
+                            <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-{{ topic.labelUrl }}" role="tab" aria-controls="nav-home" aria-selected="true">{{ topic.label|capitalize }}</a>
                         {% else %}
                             <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-nothing" role="tab" aria-controls="nav-home" aria-selected="true">Pas de correspondance</a>
                         {% endfor %}
@@ -122,7 +124,16 @@
         config1.waveAnimateTime = 950;
         var gauge1 = loadLiquidFillGauge("fillgauge1", {{ score.value * 100 }}, config1);
 
+
+        let blocNombreVote = document.getElementById('n-nombre-vote');
         function sendReview(){
+            while (blocNombreVote.hasChildNodes()) {
+                blocNombreVote.removeChild(blocNombreVote.lastChild);
+            }
+            const paragraphe = document.createElement("p");
+            const text = document.createTextNode('Merci pour votre contribution !');
+            paragraphe.appendChild(text);
+            blocNombreVote.appendChild(paragraphe);
             let dataInformation = {
                 urlArticle: "{{ link }}"
             };
