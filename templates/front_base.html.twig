@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block body %}
+    <header>
+        {% include 'components/header.html.twig' %}
+    </header>
+    <main class="container">
+        {% block main %}{% endblock %}
+    </main>
+    <footer>
+        {% include 'components/footer.html.twig' %}
+    </footer>
+{% endblock %}

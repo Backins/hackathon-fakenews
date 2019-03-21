@@ -1,11 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'front_base.html.twig' %}
 
-{% block title %}New User{% endblock %}
+{% block title %}NewsScan - Inscription{% endblock %}
 
-{% block body %}
-    <h1>Create new User</h1>
-
-    {{ include('user/_form.html.twig') }}
-
-    <a href="{{ path('user_index') }}">back to list</a>
+{% block main %}
+    <div class="row">
+        <div class="offset-md-2 col-md-8 col-12">
+            <h1>Create new User</h1>
+            <div class="form-newsscan">
+                {{ include('user/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'front_base.html.twig' %}
+
+{% block title %}NewsScan - Admin Blog{% endblock %}
+
+{% block main %}
+    <h1>Blog index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Autor</th>
+                <th>Body</th>
+                <th>Title</th>
+                <th>Published</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for blog in blogs %}
+            <tr>
+                <td>{{ blog.id }}</td>
+                <td>{{ blog.autor.email }}</td>
+                <td>{{ blog.body }}</td>
+                <td>{{ blog.title }}</td>
+                <td>{{ blog.published ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_blog_show', {'id': blog.id}) }}">show</a>
+                    <a href="{{ path('app_blog_edit', {'id': blog.id}) }}">edit</a>
+                    <a href="{{ path('app_blog_delete', {'id': blog.id}) }}">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_blog_new') }}">Create new</a>
+{% endblock %}

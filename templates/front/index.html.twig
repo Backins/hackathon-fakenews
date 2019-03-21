@@ -1,22 +1,24 @@
-{% extends 'base.html.twig' %}
+{% extends 'front_base.html.twig' %}
 
-{% block title %}Index Front{% endblock %}
+{% block title %}NewsScan - Accueil{% endblock %}
 
-{% block body %}
-    <main>
-        <p>Accueil</p>
-        <a class="btn btn-primary" href="{{ path('app_security_login') }}">Login</a>
-        <a class="btn btn-danger" href="{{ path('app_security_logout') }}">Logout</a>
-
-        <form action="{{ path('app_default_show') }}" method="post">
-            <div class="form-group">
-                <label for="link-search">Hey ! Insère le lien de l'article :)</label>
-                <input type="text" name="linkSearch" class="form-control" id="link-search" placeholder="https://example.com">
+{% block main %}
+        <div class="row">
+            <div class="offset-md-3 col-md-6 col-12">
+                <h1>NewsScan</h1>
+                <p>L'algorithme, qui vous indique l'indice de confiance d'un article !</p>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </main>
-{% endblock %}
-
-{% block javascripts %}
+        </div>
+        <div class="row">
+            <div class="offset-md-3 col-md-6 col-12">
+                <h4>Connâitre la fiabilité de votre article</h4>
+                <form action="{{ path('app_default_show') }}" method="post">
+                    <div class="form-group">
+                        <label for="link-search">Hey ! Insère le lien de l'article</label>
+                        <input type="text" name="linkSearch" class="form-control" id="link-search" placeholder="https://example.com">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Scanner</button>
+                </form>
+            </div>
+        </div>
 {% endblock %}
