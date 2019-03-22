@@ -47,4 +47,21 @@ class ReviewRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function checkVoteUser($link, $user): bool
+    {
+        $result = $this->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->andWhere('r.urlArticle = :link')
+            ->andWhere('r.userReview = :user')
+            ->setParameter('link', $link)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+        if($result[1]){
+            return true;
+        }
+        return false;
+    }
 }

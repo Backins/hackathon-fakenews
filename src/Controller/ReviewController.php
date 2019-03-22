@@ -35,11 +35,10 @@ class ReviewController extends AbstractController
         $link = $request->request->get("urlArticle");
         if (filter_var($link, FILTER_VALIDATE_URL)) {
             if($this->getUser()){
-                $findVote = $reviewRepository->findBy([
-                    'urlArticle' => $link,
-                    'userReview' => $this->getUser(),
-                ]);
-                if(empty($findVote)){
+                $user = $this->getUser();
+                $em = $this->getDoctrine()->getManager();
+                $findVote = $em->getRepository(Review::class)->checkVoteUser($link, $user);
+                if(!$findVote){
                     $Review->setUrlArticle($link);
                     $Review->setUserReview($this->getUser());
                     $entityManager = $this->getDoctrine()->getManager();

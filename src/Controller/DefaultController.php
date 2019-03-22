@@ -68,6 +68,11 @@ class DefaultController extends AbstractController
     {
         $link = $request->request->get('linkSearch');
         if (filter_var($link, FILTER_VALIDATE_URL)) {
+            $user = $this->getUser();
+            $em = $this->getDoctrine()->getManager();
+            $countReview = $em->getRepository(Review::class)->getCount($link);
+            $findVote = $em->getRepository(Review::class)->checkVoteUser($link, $user);
+
             $source = parse_url($link);
             $source = $source["scheme"].'://'.$source["host"];
             $response = $newscanService->getArticle($link);
@@ -77,38 +82,22 @@ class DefaultController extends AbstractController
                     'link' => $link,
                     'score' => ['textColor' =>0, 'backgroundColor' => 0 ,'value' => 0],
                 ]);
-            } else {
-                $targetArticle = $response->objects[0];
-                $user = $this->getUser();
-                $findVote = false;
-                if($user){
-                    $findVote = $reviewRepository->findBy([
-                        'urlArticle' => $link,
-                        'userReview' => $this->getUser(),
-                    ]);
-                    if(empty($findVote)){
-                        $findVote = false;
-                    }
-                }
-
-                $em = $this->getDoctrine()->getManager();
-                $countReview = $em->getRepository(Review::class)->getCount($link);
-
-                $score = $newscanService->calculArticleConfidenceLevel($targetArticle);
-
-                $topics = $newscanService->getTopicsArticle($targetArticle->tags);
-
-                return $this->render('front/show.html.twig', [
-                    'topics' => $topics,
-                    'article' => $targetArticle,
-                    'user' => $user,
-                    'findVote' => $findVote,
-                    'score' => $score,
-                    'link' => $link,
-                    'source' => $source,
-                    'nbVote' => $countReview[1]
-                ]);
             }
+            $targetArticle = $response->objects[0];
+            $score = $newscanService->calculArticleConfidenceLevel($targetArticle);
+
+            $topics = $newscanService->getTopicsArticle($targetArticle->tags);
+
+            return $this->render('front/show.html.twig', [
+                'topics' => $topics,
+                'article' => $targetArticle,
+                'user' => $user,
+                'findVote' => $findVote,
+                'score' => $score,
+                'link' => $link,
+                'source' => $source,
+                'nbVote' => $countReview[1]
+            ]);
 
         }
         return $this->render('front/show.html.twig', [
