@@ -23,6 +23,11 @@
             <a href="{{ path('app_front_blog_index') }}">News</a>
         </li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <li {% if app.request.get('_route') == 'app_back_admin_index' %} class="active"{% endif %}>
+                    <a href="{{ path('app_back_admin_index') }}">Admin</a>
+                </li>
+            {% endif %}
             <li>
                 <a href="{{ path('app_security_logout') }}" class="login">
                     <button class="n-btn-primary">
