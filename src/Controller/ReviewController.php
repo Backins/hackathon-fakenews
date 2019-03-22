@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Entity\Review;
+use App\Repository\ReviewRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,20 +29,28 @@ class ReviewController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route(path="/add", name="add", methods={"POST"})
      */
-    public function add(Request $request)
+    public function add(Request $request, ReviewRepository $reviewRepository)
     {
         $Review = new Review();
         $link = $request->request->get("urlArticle");
         if (filter_var($link, FILTER_VALIDATE_URL)) {
-            $Review->setUrlArticle($link);
-            $Review->setUserReview($this->getUser());
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($Review);
-            $entityManager->flush();
-            $response = new Response(json_encode(array('status' => "ok", 'data' => $link)));
-            $response->headers->set('Content-Type', 'application/json');
+            if($this->getUser()){
+                $findVote = $reviewRepository->findBy([
+                    'urlArticle' => $link,
+                    'userReview' => $this->getUser(),
+                ]);
+                if(empty($findVote)){
+                    $Review->setUrlArticle($link);
+                    $Review->setUserReview($this->getUser());
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($Review);
+                    $entityManager->flush();
+                    $response = new Response(json_encode(array('status' => "ok", 'data' => $link)));
+                    $response->headers->set('Content-Type', 'application/json');
 
-            return $response;
+                    return $response;
+                }
+            }
         }
         $response = new Response(json_encode(array('status' => "erreur")));
         $response->headers->set('Content-Type', 'application/json');
